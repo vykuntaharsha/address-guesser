@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import lobbyId from './lobby';
-import player from './player';
+import players from './players';
 
 export default combineReducers({
 	lobbyId,
-	player
+	players
 });

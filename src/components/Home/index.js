@@ -21,7 +21,7 @@ class Home extends Component {
 		});
 
 		this.props.setLobbyId(lobby.key);
-		this.props.setPlayer(player1);
+		this.props.setPlayer({ name: player1, score: 0, movesLeft: 5 });
 		history.push('game');
 	};
 
@@ -70,9 +70,13 @@ class Home extends Component {
 						.child('/lobbies')
 						.child(lobbyId)
 						.child(player2)
-						.set({ score: 0, movesLeft: 4 });
+						.set({ score: 0, movesLeft: 5 });
 					setLobbyId(lobbyId);
-					setPlayer(players.PLAYER2);
+					setPlayer({
+						name: players.PLAYER2,
+						score: 0,
+						movesLeft: 5
+					});
 					history.push('game');
 				} else {
 					this.setError('Not a valid lobby id');
