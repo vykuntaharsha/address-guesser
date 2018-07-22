@@ -17,11 +17,11 @@ class Home extends Component {
 		const lobbiesRef = database.child('lobbies');
 		const player1 = players.PLAYER1;
 		const lobby = lobbiesRef.push({
-			player1: { score: 100, movesLeft: 5 }
+			player1: { score: 300, movesLeft: 5 }
 		});
 
 		this.props.setLobbyId(lobby.key);
-		this.props.setPlayer({ name: player1, score: 100, movesLeft: 5 });
+		this.props.setPlayer({ name: player1, score: 300, movesLeft: 5 });
 		history.push('game');
 	};
 
@@ -70,11 +70,11 @@ class Home extends Component {
 						.child('/lobbies')
 						.child(lobbyId)
 						.child(player2)
-						.set({ score: 100, movesLeft: 5 });
+						.set({ score: 300, movesLeft: 5 });
 					setLobbyId(lobbyId);
 					setPlayer({
 						name: players.PLAYER2,
-						score: 100,
+						score: 300,
 						movesLeft: 5
 					});
 					history.push('game');
@@ -86,54 +86,57 @@ class Home extends Component {
 
 	render() {
 		return (
-			<main className="home">
-				{!this.state.join ? (
-					<div className="lobby-buttons">
-						<button
-							onClick={this.handleCreateLobby}
-							className="create-lobby-btn">
-							Create Lobby
-						</button>
-						<button
-							onClick={this.handleJoinLobby}
-							className="join-lobby-btn">
-							Join Lobby
-						</button>
-					</div>
-				) : (
-					''
-				)}
-				{this.state.join ? (
-					<div className="join-section">
-						{this.state.error ? (
-							<Error error={this.state.error} />
-						) : (
-							''
-						)}
-						<input
-							placeholder="Enter Lobby id"
-							ref={this.inputRef}
-							className="join-input"
-							onChange={this.handleInput}
-							required
-						/>
-						<div className="join-buttons">
+			<div>
+				<h1 style={{ textAlign: 'center' }}>Address Guesser</h1>
+				<main className="home">
+					{!this.state.join ? (
+						<div className="lobby-buttons">
 							<button
-								className="cancel-join-btn"
-								onClick={this.handleCancel}>
-								Cancel
+								onClick={this.handleCreateLobby}
+								className="create-lobby-btn">
+								Create Lobby
 							</button>
 							<button
-								className="go-join-btn"
-								onClick={this.handleGo}>
-								Go
+								onClick={this.handleJoinLobby}
+								className="join-lobby-btn">
+								Join Lobby
 							</button>
 						</div>
-					</div>
-				) : (
-					''
-				)}
-			</main>
+					) : (
+						''
+					)}
+					{this.state.join ? (
+						<div className="join-section">
+							{this.state.error ? (
+								<Error error={this.state.error} />
+							) : (
+								''
+							)}
+							<input
+								placeholder="Enter Lobby id"
+								ref={this.inputRef}
+								className="join-input"
+								onChange={this.handleInput}
+								required
+							/>
+							<div className="join-buttons">
+								<button
+									className="cancel-join-btn"
+									onClick={this.handleCancel}>
+									Cancel
+								</button>
+								<button
+									className="go-join-btn"
+									onClick={this.handleGo}>
+									Go
+								</button>
+							</div>
+						</div>
+					) : (
+						''
+					)}
+				</main>
+			</div>
 		);
 	}
 }

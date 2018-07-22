@@ -7,6 +7,7 @@ import { players as playerConstants } from '../../constants';
 import Score from '../Score';
 import Map from '../Map';
 import './game.css';
+import Meeting from '../Meeting';
 
 class Game extends Component {
 	state = {
@@ -103,6 +104,7 @@ class Game extends Component {
 		if (!this.state.lobbyFilled) {
 			return (
 				<main className="game">
+					<Meeting channel={this.props.lobbyId} />
 					<div className="lobby-id">
 						<button
 							onClick={this.handleLeave}
@@ -119,6 +121,7 @@ class Game extends Component {
 		if (this.props.players.player.movesLeft > 0) {
 			return (
 				<main className="main">
+					<Meeting channel={this.props.lobbyId} />
 					<div className="lobby-id">
 						<button
 							onClick={this.handleLeave}
@@ -139,6 +142,7 @@ class Game extends Component {
 		} else {
 			return (
 				<main className="main score">
+					<Meeting channel={this.props.lobbyId} />
 					<div className="lobby-id">
 						<button
 							onClick={this.handleLeave}
