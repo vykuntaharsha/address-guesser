@@ -8,3 +8,5 @@ export const setOpponent = player => ({
 	type: actionTypes.SET_OPPONENT,
 	player
 });
+
+export const resetGame = () => ({ type: actionTypes.RESET_GAME });

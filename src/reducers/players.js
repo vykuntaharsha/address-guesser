@@ -12,6 +12,9 @@ const players = (state = null, action) => {
 				...state,
 				opponent: action.player
 			};
+
+		case actionTypes.RESET_GAME:
+			return null;
 		default:
 			return state;
 	}

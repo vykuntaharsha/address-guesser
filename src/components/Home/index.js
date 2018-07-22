@@ -17,11 +17,11 @@ class Home extends Component {
 		const lobbiesRef = database.child('lobbies');
 		const player1 = players.PLAYER1;
 		const lobby = lobbiesRef.push({
-			player1: { score: 0, movesLeft: 5 }
+			player1: { score: 100, movesLeft: 5 }
 		});
 
 		this.props.setLobbyId(lobby.key);
-		this.props.setPlayer({ name: player1, score: 0, movesLeft: 5 });
+		this.props.setPlayer({ name: player1, score: 100, movesLeft: 5 });
 		history.push('game');
 	};
 
@@ -70,11 +70,11 @@ class Home extends Component {
 						.child('/lobbies')
 						.child(lobbyId)
 						.child(player2)
-						.set({ score: 0, movesLeft: 5 });
+						.set({ score: 100, movesLeft: 5 });
 					setLobbyId(lobbyId);
 					setPlayer({
 						name: players.PLAYER2,
-						score: 0,
+						score: 100,
 						movesLeft: 5
 					});
 					history.push('game');

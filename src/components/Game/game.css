@@ -1,0 +1,89 @@
+.game {
+	display: flex;
+	flex-direction: column;
+	background-color: var(--bg-color);
+	min-height: 100vh;
+}
+
+.lobby-id {
+	display: flex;
+	justify-content: space-around;
+	background-color: var(--third-color);
+	color: #fff;
+	padding: 1rem;
+	font-size: 2rem;
+}
+
+.leave-btn {
+	font-size: 1.2rem;
+	padding: 0 2rem;
+	transition: 0.4s ease-in-out;
+	border-radius: 15px;
+}
+
+.leave-btn:hover {
+	background-color: var(--bg-color);
+	color: #fff;
+}
+
+.waiting {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - 3rem);
+	font-size: 2rem;
+	text-transform: uppercase;
+	background-image: -webkit-linear-gradient(transparent, transparent),
+		url(https://wallpaperbrowse.com/media/images/704532.jpg);
+	-webkit-text-fill-color: transparent;
+	-webkit-background-clip: text;
+	-webkit-animation: stripes 2s linear infinite;
+	animation: stripes 2s linear infinite;
+}
+
+.players {
+	display: flex;
+	justify-content: space-around;
+	background-color: var(--fourth-color);
+	color: #fff;
+}
+
+.player > *,
+.opponent > * {
+	font-size: 1.2rem;
+}
+
+.main.score > .players {
+	font-size: 4rem;
+	align-items: center;
+	animation: flow 2s linear forwards;
+	flex-wrap: wrap;
+}
+
+.game-status {
+	font-size: 3rem;
+	width: 100vw;
+	padding: 0;
+	text-align: center;
+}
+
+@keyframes flow {
+	0% {
+		height: 10vh;
+	}
+
+	100% {
+		height: 80vh;
+	}
+}
+
+@-webkit-keyframes stripes {
+	100% {
+		background-position: 0 -150px;
+	}
+}
+@keyframes stripes {
+	100% {
+		background-position: 0 -150px;
+	}
+}

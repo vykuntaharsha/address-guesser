@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { setOpponent } from '../../actions';
+import { setOpponent, resetGame } from '../../actions';
 import database from '../../firebase';
 import { players as playerConstants } from '../../constants';
+import Score from '../Score';
+import Map from '../Map';
+import './game.css';
 
 class Game extends Component {
 	state = {
-		lobbyFilled: false
+		lobbyFilled: false,
+		reset: false
 	};
 
 	componentWillReceiveProps(nextProps) {
@@ -68,32 +72,96 @@ class Game extends Component {
 			});
 	}
 
+	handleLeave = () => {
+		database
+			.child('/lobbies')
+			.child(this.props.lobbyId)
+			.off('child_added');
+		this.props.resetGame();
+	};
+
+	handleScore = diff => {
+		const player = this.props.players.player;
+
+		player.score += diff;
+		player.movesLeft -= 1;
+
+		database
+			.child('/lobbies')
+			.child(this.props.lobbyId)
+			.child(player.name)
+			.set(player);
+
+		this.setState({ reset: true });
+		setTimeout(() => {
+			this.setState({ reset: false });
+		}, 1000);
+	};
+
 	render() {
 		if (!this.props.lobbyId) return <Redirect to="/" />;
 		if (!this.state.lobbyFilled) {
 			return (
-				<main>
-					<div>{this.props.lobbyId}</div>
-					waiting for opponent
+				<main className="game">
+					<div className="lobby-id">
+						<button
+							onClick={this.handleLeave}
+							className="leave-btn">
+							Leave
+						</button>
+						LobbyID: {this.props.lobbyId}
+					</div>
+					<div className="waiting">waiting for opponent</div>
 				</main>
 			);
 		}
 
-		return (
-			<main>
-				{this.props.lobbyId} {this.props.players.player.name}
-				{this.props.players.opponent.name}
-				<div className="map">Map</div>
-			</main>
-		);
+		if (this.props.players.player.movesLeft > 0) {
+			return (
+				<main className="main">
+					<div className="lobby-id">
+						<button
+							onClick={this.handleLeave}
+							className="leave-btn">
+							Leave
+						</button>LobbyID: {this.props.lobbyId}
+					</div>
+					<Score />
+					<div className="map">
+						{this.state.reset ? (
+							''
+						) : (
+							<Map handleScore={this.handleScore} />
+						)}
+					</div>
+				</main>
+			);
+		} else {
+			return (
+				<main className="main score">
+					<div className="lobby-id">
+						<button
+							onClick={this.handleLeave}
+							className="leave-btn">
+							Leave
+						</button>LobbyID: {this.props.lobbyId}
+					</div>
+					<Score />
+				</main>
+			);
+		}
 	}
 }
+
 const mapStateToProps = ({ lobbyId, players }) => ({ lobbyId, players });
 
 const mapDispatchToProps = dispatch => {
 	return {
 		setOpponent: o => {
 			dispatch(setOpponent(o));
+		},
+		resetGame: () => {
+			dispatch(resetGame());
 		}
 	};
 };
