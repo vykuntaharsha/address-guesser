@@ -1,0 +1,31 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Catamaran';
+}
+
+ul {
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+	cursor: pointer;
+}
+
+button {
+	outline: none;
+	border: none;
+	cursor: pointer;
+}
+
+:root {
+	--bg-color: #a5c1af;
+	--primary-color: #d6d2ac;
+	--secondary-color: #014f62;
+	--third-color: #7d5c67;
+	--fourth-color: #00163b;
+}

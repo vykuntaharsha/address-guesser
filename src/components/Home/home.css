@@ -1,0 +1,68 @@
+.home {
+	min-height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: var(--bg-color);
+}
+
+.lobby-buttons,
+.join-buttons {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 1rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.lobby-buttons > button,
+.join-buttons > button {
+	border: 2px solid;
+	width: 10rem;
+	border-radius: 5px;
+	padding: 1rem 2rem;
+	font-size: 1rem;
+	transition: 0.4s ease-in-out;
+	white-space: nowrap;
+}
+
+.join-lobby-btn,
+.go-join-btn {
+	border-color: var(--primary-color);
+	color: var(--primary-color);
+}
+
+.join-lobby-btn:hover,
+.go-join-btn:hover {
+	background-color: var(--primary-color);
+	color: #fff;
+}
+
+.create-lobby-btn,
+.cancel-join-btn {
+	border-color: var(--secondary-color);
+	color: var(--secondary-color);
+}
+
+.create-lobby-btn:hover,
+.cancel-join-btn:hover {
+	background-color: var(--secondary-color);
+	color: #fff;
+}
+
+.join-input {
+	display: block;
+	font-size: 1rem;
+	padding: 1rem;
+}
+
+.join-section {
+	display: grid;
+	grid-gap: 1rem;
+}
+
+.home .error {
+	color: red;
+}
